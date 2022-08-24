@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+const routes: Routes = [
+  {
+    path: 'names',
+    loadChildren: () => import('./forwards/forwards.module').then(m => m.ForwardsModule),
+  },
+  {
+    path: 'backwards',
+    loadChildren: () => import('./backwards/backwards.module').then(m => m.BackwardsModule),
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
